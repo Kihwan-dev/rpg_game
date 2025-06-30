@@ -4,11 +4,14 @@ import 'package:rpg_game/Models/monster.dart';
 class Game {
   Character character;
   List<Monster> monsterList = [];
-  int killCnt = 0;
+  int killMonsterCount = 0;
 
-  Game(this.character);
+  Game(this.character, this.monsterList);
 
-  void startGame() {}
+  void startGame() {
+    print("게임을 시작합니다!");
+    
+  }
 
   void battle() {}
 
