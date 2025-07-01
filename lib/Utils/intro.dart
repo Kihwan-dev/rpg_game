@@ -13,7 +13,7 @@ String getCharacterName() {
 // 캐릭터 상태 불러오기
 Character loadCharacterStatus() {
   try {
-    final file = File("lib/Datas/characters.txt");
+    final file = File("assets/characters.txt");
     final contents = file.readAsStringSync();
     final status = contents.split(",");
 
@@ -23,7 +23,14 @@ Character loadCharacterStatus() {
     int ap = int.parse(status[1]);
     int dp = int.parse(status[2]);
 
-    String name = getCharacterName();
+    String name = "";
+    RegExp regex = RegExp(r"^[a-zA-Z가-힣]+$");
+
+    while (true) {
+      name = getCharacterName();
+      if(name.isNotEmpty && regex.hasMatch(name)) break;
+      print("❗이름 형식이 올바르지 않습니다❗");
+    }
 
     print("$name, $hp, $ap, $dp");
 
@@ -38,7 +45,7 @@ Character loadCharacterStatus() {
 List<Monster> loadMonsterStatus() {
   List<Monster> monsterList = [];
   try {
-    final file = File("lib/Datas/monsters.txt");
+    final file = File("assets/monsters.txt");
     final contents = file.readAsStringSync();
     final monsters = contents.split("\n");
 
@@ -59,5 +66,15 @@ List<Monster> loadMonsterStatus() {
   } catch (e) {
     print("몬스터 리스트 데이터를 불러오는 데 실패했습니다\n$e");
     exit(1);
+  }
+}
+
+// 입력에 대한 유효성 검사
+String getValidInput(String prompt, bool Function(String) validator) {
+  while(true) {
+    stdout.write(prompt);
+    String input = stdin.readLineSync(encoding: utf8)?.trim() ?? "";
+    if(validator(input)) return input;
+    print("잘못된 입력입니다!");
   }
 }

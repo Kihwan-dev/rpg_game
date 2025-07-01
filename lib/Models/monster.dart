@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:rpg_game/Models/character.dart';
 
 class Monster {
@@ -10,5 +12,13 @@ class Monster {
 
   void attackCharacter(Character character) {}
 
-  void showStatus() {}
+  // 유저에게 공격을 가하여 피해 입힘
+  // 데미지(몬스터 공격력 - 유저 방어력)
+  void showStatus() {
+    print("$name - 체력 : $hp, 공격력 : $ap");
+  }
+
+  void setAp(int characterDp) {
+    ap = Random().nextInt(ap - characterDp) + characterDp;
+  }
 }
