@@ -13,7 +13,7 @@ String getCharacterName() {
 // 캐릭터 상태 불러오기
 Character loadCharacterStatus() {
   try {
-    final file = File("assets/characters.txt");
+    final file = File("../assets/characters.txt");
     final contents = file.readAsStringSync();
     final status = contents.split(",");
 
@@ -32,8 +32,6 @@ Character loadCharacterStatus() {
       print("❗이름 형식이 올바르지 않습니다❗");
     }
 
-    print("$name, $hp, $ap, $dp");
-
     return Character(name, hp, ap, dp);
   } catch (e) {
     print("캐릭터 데이터를 불러오는 데 실패했습니다\n$e");
@@ -45,7 +43,7 @@ Character loadCharacterStatus() {
 List<Monster> loadMonsterStatus() {
   List<Monster> monsterList = [];
   try {
-    final file = File("assets/monsters.txt");
+    final file = File("../assets/monsters.txt");
     final contents = file.readAsStringSync();
     final monsters = contents.split("\n");
 
@@ -56,8 +54,6 @@ List<Monster> loadMonsterStatus() {
       String name = status[0];
       int hp = int.parse(status[1]);
       int ap = int.parse(status[2]);
-
-      print("$name, $hp, $ap");
 
       monsterList.add(Monster(name, hp, ap));
     }
