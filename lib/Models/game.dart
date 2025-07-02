@@ -15,10 +15,11 @@ class Game {
   void startGame() {
     // 파일에서 캐릭터 정보 불러오기
     character = loadCharacterStatus();
+    character.recover();
     // 파일에서 몬스터 정보 불러오기
     monsterList = loadMonsterStatus();
 
-    print("게임을 시작합니다!");
+    print("\n게임을 시작합니다!");
     character.showStatus();
 
     while (isStillFight) {
@@ -26,7 +27,6 @@ class Game {
       monster = getRandomMonster();
       monster.setAp(character.dp);
       monster.showStatus();
-      print("");
 
       // 배틀 시작
       battle();
@@ -89,12 +89,10 @@ class Game {
 
       if (monster.hp > 0) {
         // 몬스터 턴
-        print("");
-        print("${monster.name}의 턴");
+        print("\n${monster.name}의 턴");
         monster.attack(character);
       } else {
-        print("${monster.name}을(를) 물리쳤습니다.!");
-        print("");
+        print("${monster.name}을(를) 물리쳤습니다!\n");
 
         if (monsterList.isEmpty) {
           isStillFight = false;
@@ -116,7 +114,6 @@ class Game {
 
       character.showStatus();
       monster.showStatus();
-      print("");
     }
   }
 
@@ -124,7 +121,7 @@ class Game {
     int randNum = Random().nextInt(monsterList.length);
     Monster monster = monsterList[randNum];
     monsterList.removeAt(randNum);
-    print("새로운 몬스터가 나타났습니다!");
+    print("\n새로운 몬스터가 나타났습니다!");
     return monster;
   }
 

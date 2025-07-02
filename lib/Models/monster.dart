@@ -10,7 +10,7 @@ class Monster extends Unit {
   // 데미지(몬스터 공격력 - 유저 방어력)
   @override
   void showStatus() {
-    print("$name - 체력 : $hp, 공격력 : $ap");
+    print("$name - 체력 : $hp, 공격력 : $ap\n");
   }
 
   void setAp(int characterDp) {
