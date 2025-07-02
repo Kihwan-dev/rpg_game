@@ -55,7 +55,7 @@ List<Monster> loadMonsterStatus() {
       int hp = int.parse(status[1]);
       int ap = int.parse(status[2]);
 
-      monsterList.add(Monster(name, hp, ap));
+      monsterList.add(Monster(name, hp, ap, 0));
     }
 
     return monsterList;

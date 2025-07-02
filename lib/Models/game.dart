@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 import 'dart:io';
 
@@ -80,7 +79,7 @@ class Game {
 
       switch (command) {
         case "1":
-          character.attackMonster(monster);
+          character.attack(monster);
           break;
         case "2":
           character.defend(monster);
@@ -92,7 +91,7 @@ class Game {
         // 몬스터 턴
         print("");
         print("${monster.name}의 턴");
-        monster.attackCharacter(character);
+        monster.attack(character);
       } else {
         print("${monster.name}을(를) 물리쳤습니다.!");
         print("");
