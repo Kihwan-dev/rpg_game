@@ -67,7 +67,14 @@ class Game {
     ///
     /// 유저 턴 -> 몬스터 턴 반복 후 한 쪽 체력이 0이되면 함수 종료
 
+    int playTurn = 0;
     while (true) {
+      playTurn++;
+      if(playTurn == 3) {
+        monster.dp += 2;
+        print("${monster.name}의 방어력이 증가했습니다! 현재 방어력: ${monster.dp}");
+        playTurn = 0;
+      }
       String command;
       print("${character.name}의 턴");
       while (true) {
