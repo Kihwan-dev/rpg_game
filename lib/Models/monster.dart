@@ -10,7 +10,7 @@ class Monster extends Unit {
   // 데미지(몬스터 공격력 - 유저 방어력)
   @override
   void showStatus() {
-    print("$name - 체력 : $hp, 공격력 : $ap\n");
+    print("$name - 체력: $hp, 공격력: $ap\n");
   }
 
   void setAp(int characterDp) {
@@ -18,10 +18,9 @@ class Monster extends Unit {
   }
 
   @override
-  void attack(target) {
-    if (target is Character) {
-      target.hp -= (ap - target.dp);
-      print("$name이(가) ${target.name}에게 ${ap - target.dp}만큼의 데미지를 입혔습니다.");
-    }
+  void attack(Character target) {
+    final damage = ap - target.dp;
+    target.hp -= damage;
+    print("$name이(가) ${target.name}에게 $damage만큼의 데미지를 입혔습니다.");
   }
 }

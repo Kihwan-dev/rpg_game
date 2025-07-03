@@ -4,6 +4,12 @@ import "dart:io";
 import "package:rpg_game/Models/character.dart";
 import "package:rpg_game/Models/monster.dart";
 
+enum ItemStatus {
+  none,
+  using,
+  used,
+}
+
 // 캐릭터 이름 입력
 String getCharacterName() {
   stdout.write("캐릭터의 이름을 입력하세요 : ");
@@ -17,8 +23,11 @@ Character loadCharacterStatus() {
     final contents = file.readAsStringSync();
     final status = contents.split(",");
 
-    if (status.length != 5) throw FormatException("invalid character data");
-
+    if (status.length != 5) {
+      // throw FormatException("invalid character data");
+      print("캐릭터 데이터를 불러오는 데 실패했습니다!");
+      exit(1);
+    }
     int hp = int.parse(status[0]);
     int ap = int.parse(status[1]);
     int dp = int.parse(status[2]);
@@ -30,7 +39,7 @@ Character loadCharacterStatus() {
 
     while (true) {
       name = getCharacterName();
-      if(name.isNotEmpty && regex.hasMatch(name)) break;
+      if (name.isNotEmpty && regex.hasMatch(name)) break;
       print("❗이름 형식이 올바르지 않습니다❗");
     }
 
@@ -51,7 +60,11 @@ List<Monster> loadMonsterStatus() {
 
     for (String monster in monsters) {
       final status = monster.split(",");
-      if (status.length != 3) throw FormatException("Invalid character data");
+      if (status.length != 3) {
+        // throw FormatException("Invalid character data");
+        print("몬스터 리스트 데이터를 불러오는 데 실패했습니다!");
+        exit(1);
+      }
 
       String name = status[0];
       int hp = int.parse(status[1]);
@@ -69,16 +82,10 @@ List<Monster> loadMonsterStatus() {
 
 // 입력에 대한 유효성 검사
 String getValidInput(String prompt, bool Function(String) validator) {
-  while(true) {
+  while (true) {
     stdout.write(prompt);
-    String input = stdin.readLineSync(encoding: utf8)?.trim() ?? "";
-    if(validator(input)) return input;
-    print("잘못된 입력입니다!");
+    final input = stdin.readLineSync(encoding: utf8)?.trim() ?? '';
+    if (validator(input)) return input;
+    print('잘못된 입력입니다!');
   }
-}
-
-enum ItemStatus {
-  none,
-  using,
-  used,
 }

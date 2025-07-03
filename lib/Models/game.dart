@@ -70,7 +70,7 @@ class Game {
     int playTurn = 0;
     while (true) {
       playTurn++;
-      if(playTurn == 3) {
+      if (playTurn == 3) {
         monster.dp += 2;
         print("${monster.name}의 방어력이 증가했습니다! 현재 방어력: ${monster.dp}");
         playTurn = 0;
@@ -141,8 +141,8 @@ class Game {
   }
 
   Monster getRandomMonster() {
-    int randNum = Random().nextInt(monsterList.length);
-    Monster monster = monsterList[randNum];
+    final randNum = Random().nextInt(monsterList.length);
+    final monster = monsterList[randNum];
     monsterList.removeAt(randNum);
     print("\n새로운 몬스터가 나타났습니다!");
     return monster;

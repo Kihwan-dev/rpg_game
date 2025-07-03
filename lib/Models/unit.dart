@@ -8,6 +8,6 @@ abstract class Unit {
 
   void showStatus();
   
-  void attack(dynamic target);
+  void attack(covariant Unit target);
   
 }
