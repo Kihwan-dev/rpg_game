@@ -1,3 +1,7 @@
 Batman,30,20
 Spiderman,20,30
 Superman,30,10
+Ironman,30,10
+Captain,30,10
+Hawkeye,30,10
+Antman,30,10

@@ -17,11 +17,13 @@ Character loadCharacterStatus() {
     final contents = file.readAsStringSync();
     final status = contents.split(",");
 
-    if (status.length != 3) throw FormatException("invalid character data");
+    if (status.length != 5) throw FormatException("invalid character data");
 
     int hp = int.parse(status[0]);
     int ap = int.parse(status[1]);
     int dp = int.parse(status[2]);
+    int level = int.parse(status[3]);
+    int exp = int.parse(status[4]);
 
     String name = "";
     RegExp regex = RegExp(r"^[a-zA-Z가-힣]+$");
@@ -32,7 +34,7 @@ Character loadCharacterStatus() {
       print("❗이름 형식이 올바르지 않습니다❗");
     }
 
-    return Character(name, hp, ap, dp);
+    return Character(name, hp, ap, dp, level, exp);
   } catch (e) {
     print("캐릭터 데이터를 불러오는 데 실패했습니다\n$e");
     exit(1);

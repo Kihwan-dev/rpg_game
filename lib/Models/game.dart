@@ -115,6 +115,8 @@ class Game {
       } else {
         print("${monster.name}을(를) 물리쳤습니다!\n");
 
+        character.getExp();
+
         if (monsterList.isEmpty) {
           isStillFight = false;
           return;
@@ -147,8 +149,10 @@ class Game {
   }
 
   void saveResult() {
-    final file = File("../result.txt");
-    file.writeAsString("캐릭터: ${character.name}, 남은 체력: ${character.hp > 0 ? character.hp : 0}, 결과: ${character.hp > 0 ? "승리" : "패배"}");
+    final gameFile = File("../assets/result.txt");
+    gameFile.writeAsString("캐릭터: ${character.name}, 남은 체력: ${character.hp > 0 ? character.hp : 0}, 결과: ${character.hp > 0 ? "승리" : "패배"}");
+    final characterFile = File("../assets/characters.txt");
+    characterFile.writeAsString("${character.hp},${character.ap},${character.dp},${character.level},${character.exp}");
     print("결과가 저장되었습니다.");
   }
 }
