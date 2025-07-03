@@ -39,7 +39,7 @@ class Game {
     if (monsterList.isEmpty) {
       print("축하합니다! 모든 몬스터를 물리쳤습니다.");
     } else {
-      if(character.hp <= 0) print("사망띠..");
+      if (character.hp <= 0) print("사망띠..");
       print("게임을 종료합니다.");
     }
     String result = getValidInput("결과를 저장하시겠습니까? (y/n): ", (input) => input.toLowerCase() == "y" || input.toLowerCase() == "n").toLowerCase();
@@ -68,13 +68,22 @@ class Game {
     /// 유저 턴 -> 몬스터 턴 반복 후 한 쪽 체력이 0이되면 함수 종료
 
     while (true) {
-      // 유저 턴으로 시작
+      String command;
       print("${character.name}의 턴");
-      String command = getValidInput("행동을 선택하세요. (1: 공격, 2: 방어): ", (input) => input == "1" || input == "2");
+      while (true) {
+        // 안내문구와 입력은 여기서만!
+        command = getValidInput("행동을 선택하세요. (1: 공격, 2: 방어, 3: 아이템): ", (input) => input == "1" || input == "2" || input == "3");
 
-      if (command.isEmpty) {
-        print("입력이 잘못되었습니다.");
-        continue;
+        if (command == "3") {
+          if (character.item == ItemStatus.none) {
+            character.useItem();
+            print("아이템 사용으로 공격력이 2배(${character.ap})가 되었습니다.");
+          } else {
+            print("이미 사용한 아이템입니다. 다른 행동을 선택하세요.");
+          }
+          continue;
+        }
+        break; // 정상 입력이면 반복문 탈출
       }
 
       switch (command) {
@@ -85,6 +94,11 @@ class Game {
           character.defend(monster);
           break;
         default:
+      }
+
+      if (character.item == ItemStatus.using) {
+        character.item = ItemStatus.used;
+        character.ap = character.ap ~/ 2;
       }
 
       if (monster.hp > 0) {
@@ -106,7 +120,7 @@ class Game {
         return;
       }
 
-      if(character.hp <= 0) {
+      if (character.hp <= 0) {
         print("${monster.name}에게 죽었습니다..");
         isStillFight = false;
         return;

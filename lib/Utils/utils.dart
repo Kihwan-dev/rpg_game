@@ -74,3 +74,9 @@ String getValidInput(String prompt, bool Function(String) validator) {
     print("잘못된 입력입니다!");
   }
 }
+
+enum ItemStatus {
+  none,
+  using,
+  used,
+}

@@ -2,8 +2,11 @@ import 'dart:math';
 
 import 'package:rpg_game/Models/monster.dart';
 import 'package:rpg_game/Models/unit.dart';
+import 'package:rpg_game/Utils/utils.dart';
 
 class Character extends Unit {
+  ItemStatus item = ItemStatus.none;
+
   Character(super.name, super.hp, super.ap, super.dp);
 
   // 상태 출력
@@ -32,5 +35,10 @@ class Character extends Unit {
       hp += 10;
       print("보너스 체력을 얻었습니다! 현재 체력: $hp");
     }
+  }
+
+  void useItem() {
+    item = ItemStatus.using;
+    ap *= 2;
   }
 }
